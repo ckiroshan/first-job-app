@@ -1,6 +1,8 @@
 package com.irocodes.firstjobapp.job;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -11,8 +13,16 @@ public class JobController {
     // Temporary Array List [As DB is not yet connected]
     private List<Job> jobs = new ArrayList<>();
 
+    // Get all jobs
     @GetMapping("/jobs")
     public List<Job> findAll() {
         return jobs;
+    }
+
+    // Create a new job
+    @PostMapping("/jobs")
+    public String createJob(@RequestBody Job job) {
+        jobs.add(job);
+        return "Job added successfully!";
     }
 }
