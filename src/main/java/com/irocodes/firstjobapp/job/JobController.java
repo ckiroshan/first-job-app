@@ -10,19 +10,24 @@ import java.util.List;
 
 @RestController
 public class JobController {
-    // Temporary Array List [As DB is not yet connected]
-    private List<Job> jobs = new ArrayList<>();
+    // JobService object
+    private JobService jobService;
+
+    // Constructor
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
 
     // Get all jobs
     @GetMapping("/jobs")
     public List<Job> findAll() {
-        return jobs;
+        return jobService.findAll();
     }
 
     // Create a new job
     @PostMapping("/jobs")
     public String createJob(@RequestBody Job job) {
-        jobs.add(job);
+        jobService.createJob(job);
         return "Job added successfully!";
     }
 }
