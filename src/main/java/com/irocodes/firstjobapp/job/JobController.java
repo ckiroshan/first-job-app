@@ -1,8 +1,10 @@
 package com.irocodes.firstjobapp.job;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -17,25 +19,25 @@ public class JobController {
 
     // Get all jobs
     @GetMapping("/jobs")
-    public List<Job> findAll() {
-        return jobService.findAll();
+    public ResponseEntity<List<Job>> findAll() {
+        return ResponseEntity.ok(jobService.findAll());
     }
 
     // Get Job by ID
     @GetMapping("/jobs/{id}")
-    private Job getJobById(@PathVariable Long id) {
+    private ResponseEntity<Job> getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
         if (job != null) {
-            return job;
+            return new ResponseEntity<>(job, HttpStatus.OK);
         }
         // If Job ID not found! will return
-        return new Job(1L, "TestJob", "TestJob Description", "10000", "30000", "LA");
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     // Create a new job
     @PostMapping("/jobs")
-    public String createJob(@RequestBody Job job) {
+    public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
-        return "Job added successfully!";
+        return new ResponseEntity<>("Job added successfully!", HttpStatus.CREATED);
     }
 }
