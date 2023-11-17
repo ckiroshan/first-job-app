@@ -3,8 +3,17 @@ package com.irocodes.firstjobapp.job;
 import java.util.List;
 
 public interface JobService {
-//    All methods are defined here. They are implemented on JobServiceImpl
-    List<Job> findAll(); // Method: Get all Jobs
-    void createJob(Job job); // Method: Create a new Job
-    Job getJobById(Long id); // Method: Get Job with {id}
+    //    All methods are defined here. They are implemented on JobServiceImpl
+
+    // Method: Get all Jobs
+    List<Job> findAll();
+
+    // Method: Create a new Job
+    void createJob(Job job);
+
+    // Method: Get Job with {id}
+    Job getJobById(Long id);
+
+    // Method: Delete Job with {id}
+    boolean deleteJobById(Long id);
 }
