@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/jobs") // Base URL
 public class JobController {
     // JobService object
     private JobService jobService;
@@ -17,13 +18,13 @@ public class JobController {
     }
 
     // Get all jobs
-    @GetMapping("/jobs")
+    @GetMapping
     public ResponseEntity<List<Job>> findAll() {
         return ResponseEntity.ok(jobService.findAll());
     }
 
     // Get Job by ID
-    @GetMapping("/jobs/{id}")
+    @GetMapping("/{id}")
     private ResponseEntity<Job> getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
         if (job != null) {
@@ -34,14 +35,14 @@ public class JobController {
     }
 
     // Create a new job
-    @PostMapping("/jobs")
+    @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
         return new ResponseEntity<>("Job added successfully!", HttpStatus.CREATED);
     }
 
     // Delete existing Job by ID
-    @DeleteMapping("/jobs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
         boolean deleted = jobService.deleteJobById(id);
         if (deleted) {
@@ -52,7 +53,8 @@ public class JobController {
     }
 
     // Update existing Job by ID
-    @PutMapping("/jobs/{id}")
+    // @RequestMapping(value ="/{id}", method = RequestMethod.PUT) - But @PutMapping is used instead
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Job updatedJob) {
         boolean updated = jobService.updateJob(id, updatedJob);
         if (updated) {
