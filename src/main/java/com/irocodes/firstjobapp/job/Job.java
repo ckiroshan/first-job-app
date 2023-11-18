@@ -1,6 +1,12 @@
 package com.irocodes.firstjobapp.job;
 
+import jakarta.persistence.*;
+
+@Entity // Specifies this is an entity class
+//@Table(name = "job_table") // Custom table name if needed!
 public class Job {
+    @Id // Specifies this as PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID value is auto-generated through JPA
     private Long id;
     private String title;
     private String description;
@@ -9,7 +15,12 @@ public class Job {
     private String location;
 
     // Constructors
+    public Job() {
+        // Default constructor
+    }
+
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
+    // Parameterized constructor
         this.id = id;
         this.title = title;
         this.description = description;
