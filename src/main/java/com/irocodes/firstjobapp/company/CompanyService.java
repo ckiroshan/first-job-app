@@ -1,7 +1,5 @@
 package com.irocodes.firstjobapp.company;
 
-import com.irocodes.firstjobapp.job.Job;
-
 import java.util.List;
 
 public interface CompanyService {
@@ -12,5 +10,7 @@ public interface CompanyService {
     boolean updateCompany(Long id, Company updatedCompany); // Update Company with {id}
 
     void createCompany(Company company); // Create a new Company
+
+    boolean deleteCompanyById(Long id); // Delete Company with {id}
 
 }

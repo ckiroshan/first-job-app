@@ -15,6 +15,7 @@ public class Company {
     private String description;
 
     @JsonIgnore // Will remove recursive call backs in infinite loop.
+//    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // Will remove all jobs linked to Company
     @OneToMany(mappedBy = "company") // 1 company can have many jobs.
     private List<Job> jobs;
 //    private List<Review> reviews;
