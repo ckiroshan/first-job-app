@@ -1,5 +1,6 @@
 package com.irocodes.firstjobapp.job;
 
+import com.irocodes.firstjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity // Specifies this is an entity class
@@ -13,6 +14,9 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    @ManyToOne
+    private Company company;
 
     // Constructors
     public Job() {
@@ -76,5 +80,13 @@ public class Job {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

@@ -1,5 +1,6 @@
 package com.irocodes.firstjobapp.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.irocodes.firstjobapp.job.Job;
 import jakarta.persistence.*;
 
@@ -13,7 +14,8 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany // 1 company can have many jobs.
+    @JsonIgnore // Will remove recursive call backs in infinite loop.
+    @OneToMany(mappedBy = "company") // 1 company can have many jobs.
     private List<Job> jobs;
 //    private List<Review> reviews;
 
