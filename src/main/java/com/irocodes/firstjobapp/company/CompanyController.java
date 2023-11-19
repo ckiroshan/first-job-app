@@ -1,9 +1,8 @@
 package com.irocodes.firstjobapp.company;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +15,21 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    // Get all Companies
     @GetMapping
     public ResponseEntity<List<Company>> findAllCompanies() {
         return ResponseEntity.ok(companyService.findAllCompanies());
+    }
+
+    // Update existing Company by ID
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company updatedCompany) {
+        boolean updated = companyService.updateCompany(id,updatedCompany);
+        if(updated) {
+            return new ResponseEntity<>("Company updated successfully!",HttpStatus.OK);
+        }
+        // If Company ID not found! will return
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

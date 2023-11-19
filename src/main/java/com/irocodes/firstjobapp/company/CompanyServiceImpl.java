@@ -1,9 +1,9 @@
 package com.irocodes.firstjobapp.company;
 
-import com.irocodes.firstjobapp.job.Job;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -13,9 +13,23 @@ public class CompanyServiceImpl implements CompanyService {
         this.companyRepository = companyRepository;
     }
 
-    @Override
+    @Override // Get all Companies
     public List<Company> findAllCompanies() {
         return companyRepository.findAll();
+    }
+
+    @Override // Update existing Company by ID
+    public boolean updateCompany(Long id, Company updatedCompany) {
+        Optional<Company> companyOptional = companyRepository.findById(id);
+        if(companyOptional.isPresent()){
+            Company company = companyOptional.get();
+            company.setName(updatedCompany.getName());
+            company.setDescription(updatedCompany.getDescription());
+            company.setJobs(updatedCompany.getJobs());
+            companyRepository.save(company);
+            return true;
+        }
+        return false;
     }
 
 }

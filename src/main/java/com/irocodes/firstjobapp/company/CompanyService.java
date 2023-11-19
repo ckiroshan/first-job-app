@@ -9,4 +9,6 @@ public interface CompanyService {
 
     List<Company> findAllCompanies(); // Get all Companies
 
+    boolean updateCompany(Long id, Company updatedCompany); // Update Company with {id}
+
 }
