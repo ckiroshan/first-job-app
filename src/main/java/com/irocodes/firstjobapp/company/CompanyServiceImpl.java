@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override // Update existing Company by ID
     public boolean updateCompany(Long id, Company updatedCompany) {
         Optional<Company> companyOptional = companyRepository.findById(id);
-        if(companyOptional.isPresent()){
+        if (companyOptional.isPresent()) {
             Company company = companyOptional.get();
             company.setName(updatedCompany.getName());
             company.setDescription(updatedCompany.getDescription());
@@ -30,6 +30,11 @@ public class CompanyServiceImpl implements CompanyService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void createCompany(Company company) {
+        companyRepository.save(company);
     }
 
 }

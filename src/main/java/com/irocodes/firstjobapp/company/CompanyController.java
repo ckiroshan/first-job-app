@@ -32,4 +32,11 @@ public class CompanyController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // Create a new Company
+    @PostMapping
+    public ResponseEntity<String> createCompany(@RequestBody Company company) {
+        companyService.createCompany(company);
+        return new ResponseEntity<>("Company added successfully!", HttpStatus.CREATED);
+    }
+
 }
