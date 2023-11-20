@@ -32,12 +32,12 @@ public class CompanyServiceImpl implements CompanyService {
         return false;
     }
 
-    @Override
+    @Override // Create a new Company
     public void createCompany(Company company) {
         companyRepository.save(company);
     }
 
-    @Override
+    @Override // Delete existing Company by ID
     public boolean deleteCompanyById(Long id) {
         if(companyRepository.existsById(id)) {
             companyRepository.deleteById(id);
@@ -45,6 +45,11 @@ public class CompanyServiceImpl implements CompanyService {
         } else {
             return false;
         }
+    }
+
+    @Override // Get existing Company by ID
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).orElse(null);
     }
 
 }

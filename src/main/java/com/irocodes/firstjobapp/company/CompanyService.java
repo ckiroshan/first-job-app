@@ -13,4 +13,6 @@ public interface CompanyService {
 
     boolean deleteCompanyById(Long id); // Delete Company with {id}
 
+    Company getCompanyById(Long id); // Get Company by {id}
+
 }
