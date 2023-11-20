@@ -35,12 +35,23 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
-    @Override
+    @Override // Get review for a company by ID
     public Review getReviewById(Long companyId, Long reviewId) {
         List<Review> reviews = reviewRepository.findByCompanyId(companyId);
         return reviews.stream()
                 .filter(review -> review.getId().equals(reviewId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override // Update review ID of a company
+    public boolean updateReview(Long companyId, Long reviewId, Review updatedReview) {
+        if (companyService.getCompanyById(companyId) != null) {
+            updatedReview.setCompany(companyService.getCompanyById(companyId));
+            updatedReview.setId(reviewId);
+            reviewRepository.save(updatedReview);
+            return true;
+        } else
+            return false;
     }
 }

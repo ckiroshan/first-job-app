@@ -31,12 +31,22 @@ public class ReviewController {
     }
 
     @GetMapping("/reviews/{reviewId}") // Get review for a company by ID
-    private ResponseEntity<Review> getReviewById(@PathVariable Long companyId, @PathVariable Long reviewId) {
+    public ResponseEntity<Review> getReviewById(@PathVariable Long companyId, @PathVariable Long reviewId) {
         Review reviews = reviewService.getReviewById(companyId, reviewId);
         if (reviews != null) {
             return new ResponseEntity<>(reviews, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/reviews/{reviewId}") // Update review ID of a company
+    public ResponseEntity<String> updateReview(@PathVariable Long companyId, @PathVariable Long reviewId, @RequestBody Review review) {
+        boolean updatedReview = reviewService.updateReview(companyId, reviewId, review);
+        if (updatedReview) {
+            return new ResponseEntity<>("Review Updated Successfully!", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Review Not Updated!", HttpStatus.NOT_FOUND);
         }
     }
 }
