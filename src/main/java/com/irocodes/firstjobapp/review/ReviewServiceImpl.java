@@ -54,4 +54,18 @@ public class ReviewServiceImpl implements ReviewService {
         } else
             return false;
     }
+
+    @Override // Delete review by Review ID
+    public boolean deleteReview(Long companyId, Long reviewId) {
+        if (companyService.getCompanyById(companyId) != null && reviewRepository.existsById(reviewId)) {
+            Review review = reviewRepository.findById(reviewId).orElse(null); // Retrieve review
+            Company company = review.getCompany();  // Retrieve company
+            company.getReviews().remove(review);  // Remove review from company reference
+            review.setCompany(null);
+            companyService.updateCompany(companyId, company); // Updating the company
+            reviewRepository.deleteById(reviewId); // Deleting the review
+            return true;
+        } else
+            return false;
+    }
 }
