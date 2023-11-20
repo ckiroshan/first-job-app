@@ -1,7 +1,13 @@
 package com.irocodes.firstjobapp.review;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/companies/{companyId}")
@@ -10,5 +16,10 @@ public class ReviewController {
 
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
+    }
+
+    @GetMapping("/reviews") // Get all reviews of a company
+    public ResponseEntity<List<Review>> findAllReviews(@PathVariable Long companyId) {
+        return new ResponseEntity<>(reviewService.getAllReviews(companyId), HttpStatus.OK);
     }
 }
