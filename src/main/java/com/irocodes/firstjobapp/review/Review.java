@@ -1,5 +1,7 @@
 package com.irocodes.firstjobapp.review;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.irocodes.firstjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,9 @@ public class Review {
     private String description;
     private double rating;
 
+    @ManyToOne
+    @JsonIgnore
+    private Company company;
 
     // Constructors
     public Review() {
@@ -56,4 +61,11 @@ public class Review {
         this.rating = rating;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 }

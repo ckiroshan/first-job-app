@@ -2,6 +2,7 @@ package com.irocodes.firstjobapp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.irocodes.firstjobapp.job.Job;
+import com.irocodes.firstjobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,11 +15,12 @@ public class Company {
     private String name;
     private String description;
 
-    @JsonIgnore // Will remove recursive call backs in infinite loop.
 //    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // Will remove all jobs linked to Company
+    @JsonIgnore // Will remove recursive call backs in infinite loop.
     @OneToMany(mappedBy = "company") // 1 company can have many jobs.
     private List<Job> jobs;
-//    private List<Review> reviews;
+    @OneToMany(mappedBy = "company") // 1 company can have many reviews.
+    private List<Review> reviews;
 
     // Constructors
     public Company() {
@@ -62,5 +64,13 @@ public class Company {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
