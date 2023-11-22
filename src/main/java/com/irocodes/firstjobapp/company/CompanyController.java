@@ -24,9 +24,9 @@ public class CompanyController {
     // Update existing Company by ID
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company updatedCompany) {
-        boolean updated = companyService.updateCompany(id,updatedCompany);
-        if(updated) {
-            return new ResponseEntity<>("Company updated successfully!",HttpStatus.OK);
+        boolean updated = companyService.updateCompany(id, updatedCompany);
+        if (updated) {
+            return new ResponseEntity<>("Company updated successfully!", HttpStatus.OK);
         }
         // If Company ID not found! will return
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +47,7 @@ public class CompanyController {
             return new ResponseEntity<>("Company deleted successfully!", HttpStatus.OK);
         }
         // If Job ID not found! will return
-        return new ResponseEntity<>("Company not found!",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Company not found!", HttpStatus.NOT_FOUND);
     }
 
     // Get Company by ID

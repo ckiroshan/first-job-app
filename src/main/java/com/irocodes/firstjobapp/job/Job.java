@@ -24,7 +24,7 @@ public class Job {
     }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
-    // Parameterized constructor
+        // Parameterized constructor
         this.id = id;
         this.title = title;
         this.description = description;
