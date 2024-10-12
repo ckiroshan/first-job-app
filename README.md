@@ -1,50 +1,66 @@
-# Job Application App
+# Job Application Portal API
 
-This repository contains a Job Application App developed using Spring Boot. The application provides APIs for managing job listings, companies, and user reviews. It leverages the following technologies:
+This repository contains a **RESTful API** developed using **Spring Boot**. The application provides APIs for managing job listings, companies, and user reviews, allowing for efficient job application management and review functionalities.
 
-- **Java Version:** 17
-- **Description:** Job application project for Spring Boot
-- **Dependencies:**
-  - `spring-boot-starter-web`
-  - `spring-boot-starter-data-jpa`
-  - `h2`
-  - `spring-boot-starter-actuator`
-  - `spring-boot-starter-test`
+## Features
 
-## Project Structure
+- Create, read, update, and delete job listings.
+- Manage company details and perform CRUD operations on company data.
+- Add, edit, and manage user reviews for jobs and companies.
+- APIs to manage all entities.
 
-The app is organized into three main packages:
+## Main Entities
 
-1. **Job:** Manages job listings and related information.
-2. **Company:** Handles company details and related functionalities.
-3. **Review:** Manages user reviews for companies and jobs.
+Each entity comes with its own endpoints for performing CRUD (Create, Read, Update, Delete) operations.
+1. **Job**: Manages job listings and related information.
+2. **Company**: Handles company details and related functionalities.
+3. **Review**: Manages user reviews for companies and jobs.
 
-Each package contains separate endpoints for performing CRUD (Create, Read, Update, Delete) operations.
+## Technologies Used
 
-## Docker Containerization
+The application is built using **Spring Boot** and leverages several key technologies to provide a robust and scalable backend:
 
-The entire application has been containerized using Docker. Containerization ensures consistent deployment across different environments, making it easier to manage dependencies and deploy the app seamlessly.
+### Key Technologies
 
-## Usage
+- **Spring Web**: For creating RESTful APIs to manage job listings, companies, and reviews.
+- **Spring Data JPA**: For interacting with the H2 in-memory database to perform CRUD operations.
+- **Spring Actuator**: Provides monitoring and management endpoints to check the health and performance of the application.
+- **H2 Database**: Used as an in-memory database for development and testing purposes.
+- **Docker**: The app is containerized for easy deployment across different environments, ensuring consistent operation and simpler dependency management.
 
-To run the application, follow these steps:
+## API Endpoints
 
-1. Ensure you have Docker installed on your system.
-2. Clone this repository to your local machine.
-3. Open a terminal in the project directory.
-4. Run the following Docker command to build the image:
-   ```bash
-   docker build -t job-application-app .
-5. After the build is complete, run the Docker container:
-   ```bash
-   docker run -p 8080:8080 job-application-app
+Each of the main entities have dedicated endpoints for managing data. Below is a brief overview:
 
-The application will be accessible at http://localhost:8081.
+### Company Endpoints
+- `GET /companies`: Retrieve a list of all companies.
+- `POST /companies`: Add a new company.
+- `PUT /companies/{id}`: Update company details by ID.
+- `DELETE /companies/{id}`: Delete a company by ID.
 
-## Database
-The app uses H2 as the in-memory database for development and testing purposes. You can access the H2 console at http://localhost:8080/h2-console. Make sure to configure the JDBC URL as jdbc:h2:mem:testdb when prompted.
+### Job Endpoints
+- `GET /jobs`: Retrieve a list of all job listings.
+- `POST /jobs`: Create a new job listing.
+- `PUT /jobs/{id}`: Update a job listing by ID.
+- `DELETE /jobs/{id}`: Delete a job listing by ID.
 
-## Frontend (Coming Soon)
-The frontend for the Job Application App is currently under development and will be available soon.
+### Review Endpoints
+- `GET /companies/{companyId}/reviews`: Retrieve all reviews for a specific company.
+- `POST /companies/{companyId}/reviews`: Add a new review for a company.
+- `PUT /companies/{companyId}/reviews/{reviewId}`: Update a specific review by ID.
+- `DELETE /companies/{companyId}/reviews/{reviewId}`: Delete a review by ID.
 
-Feel free to explore and contribute to the project. If you have any questions or feedback, please open an issue or reach out to the project maintainers. Thank you for your interest!
+## Deployment and Containerization
+The entire application is containerized using **Docker**, allowing for:
+
+- **Consistent deployment**: Ensure that the app runs the same across different environments (development, testing, production).
+- **Simplified dependency management**: All dependencies are bundled within the container, making it easier to manage and deploy.
+
+## Future Implementations
+- **SQL Database** - PostgresSQL to be utilized next.
+- **Microservices** - On Springboot using Spring Cloud.
+- **Spring Security** - To secure the API & authenticate users.
+- **Frontend** - To be developed and will be available soon.
+
+## Contributing
+Contributions are currently closed at the moment! 
